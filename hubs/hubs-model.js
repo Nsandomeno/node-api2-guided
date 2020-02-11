@@ -14,13 +14,18 @@ module.exports = {
 };
 
 function find(query) {
-  const { page = 1, limit = 2, sortby = 'id', sortdir = 'asc' } = query;
+  const { page = 1,
+    limit = 2,
+    sortby = 'id',
+    sortdir = 'asc',
+    skip = 0
+      } = query;
   const offset = limit * (page - 1);
 
   let rows = db('hubs')
     .orderBy(sortby, sortdir)
     .limit(limit)
-    .offset(offset);
+    .offset(skip);
 
   return rows;
 }
